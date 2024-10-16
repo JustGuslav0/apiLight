@@ -1,6 +1,5 @@
-const { error } = require("console");
-const Produto = require("../model/product_model");
-
+const { error } = require('console');
+const Produto = require('../model/product_model');
 
 exports.createProduct = async (req, res) => {
       try {
@@ -19,13 +18,13 @@ exports.createProduct = async (req, res) => {
               nome: req.body.nome,
               descricao: req.body.descricao,
               preco: req.body.preco,
-              quantidade: req.body.quantidade,
+              categoria: req.body.categoria,
           });
           
           await produto.save();
           res.status(201).json({ message: "Produto criado com sucesso!" });
-  } catch (err) {
-    res.status(400).json({ message: "Erro ao criar produto", err: err.message });
+  } catch (error) {
+    res.status(400).json({ message: "Erro ao criar produto", error: error.message });
   }
 };
 
@@ -33,15 +32,15 @@ exports.getProducts = async (req, res) => {
   try {
     const produtos = await Produto.find();
     res.status(200).json(produtos);
-  } catch (err) {
-    res.status(400).json({ message: "Erro ao buscar produtos", err });
+  } catch (error) {
+    res.status(400).json({ message: "Erro ao buscar produtos", error: error.message });
   }
 };
 
 exports.deleteProduct = async (req, res) => {
-    const nomeProduto = parseInt(req.params.nome);
+    const idProduto = req.params.id;
     try {
-        const produtoDeletado = await Produto.findOneAndDelete({ nome: nomeProduto });
+        const produtoDeletado = await Produto.findOneAndDelete({ id: idProduto });
 
         if (!produtoDeletado) {
             return res.status(404).json({ message: "Produto não encontrado", error:error.message });
@@ -58,13 +57,13 @@ exports.deleteProduct = async (req, res) => {
 };
 
 exports.updateProduct = async (req, res) => {
-  const nomeProduto = req.params.nome;
+  const idProduto = req.params.id;
     const atualizacoes = req.body; // Os dados a serem atualizados
 
     try {
         // Procura o produto pelo nome e o atualiza
         const produtoAtualizado = await Produto.findOneAndUpdate(
-            { nome: nomeProduto }, // critério de busca
+            { id: idProduto }, // critério de busca
             atualizacoes,          // dados para atualizar
             { new: true, runValidators: true } // retorna o documento atualizado e aplica validações
         );

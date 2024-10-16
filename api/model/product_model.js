@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 //Criando o esquema do produto
 const produtosSchema = new mongoose.Schema({
     id: { type: Number, unique: true },
-    nome: { type: String, required: true, unique: true},
-    descricao: { type: String, required: true },
-    preco: { type: Number, required: true, min: 0 },
-    quantidade: { type: Number, required: true, min: 0 },
+    nome: { type: String, required: true, unique: true, trim: true},
+    descricao: { type: String, required: true , trim: true},
+    preco: { type: Number, required: true, min: 0, trim: true },
+    categoria: { type: String, required: true, trim: true},
     img: { type: String }
 }, 
 { 

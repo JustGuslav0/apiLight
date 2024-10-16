@@ -2,6 +2,8 @@ const connectDB = require('./api/config/database.js');
 
 const productRoutes = require('./api/routes/product_routes.js');
 
+const usersRoutes = require('./api/routes/users_routes.js');
+
 const express = require('express');
 
 const cors = require('cors');
@@ -10,7 +12,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api", productRoutes);
+app.use("/api/products", productRoutes);
+app.use('/api/users', usersRoutes);
 
 const PORT = process.env.PORT || 3000;
 
