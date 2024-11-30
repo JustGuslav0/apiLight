@@ -1,4 +1,3 @@
-const { error } = require('console');
 const Produto = require('../model/product_model');
 
 exports.createProduct = async (req, res) => {
@@ -31,6 +30,7 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
   try {
     const produtos = await Produto.find();
+    console.log(produtos);
     res.status(200).json(produtos);
   } catch (error) {
     res.status(400).json({ message: "Erro ao buscar produtos", error: error.message });

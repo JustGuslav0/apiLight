@@ -7,10 +7,9 @@ const Schema = mongoose.Schema;
         type: Number, 
         unique: true 
       },
-      username: {
+      name: {
         type: String,
         required: true,
-        unique:true,
         trim: true
       },
       email: {

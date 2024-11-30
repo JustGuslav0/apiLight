@@ -6,7 +6,7 @@ const usersController = require('../controllers/users_controller');
 router.post('/register', usersController.registerUser);
 // Rota para fazer login
 router.get('/', usersController.getUser)
-// Rota para buscar todos os usuários
+// Rota parawd buscar todos os usuários
 router.post('/login', usersController.loginUser);
 // Rota para deletar um usuário específico
 router.delete('/:id', usersController.deleteUser)

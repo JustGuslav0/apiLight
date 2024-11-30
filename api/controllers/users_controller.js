@@ -8,12 +8,12 @@ const JWT_SECRET = 'secrettoken';
 
 exports.registerUser = async (req, res) => {
 try{
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email: req.body.email });
       if (existingUser) {
         return res.status(400).json({ message: 'Email já está cadastrado.', error: error.message });
     }
-  if (!username || !email || !password){
+  if (!name || !email || !password){
     return res.status(400).json({ message: "Por favor, preencha todos os campos obrigatórios." });
   }
   
@@ -23,9 +23,9 @@ try{
 
   const user = new User({
       id: newId,
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
+      name: name,
+      email: email,
+      password: password,
       createdAt: req.body.createdAt,
   });
 
