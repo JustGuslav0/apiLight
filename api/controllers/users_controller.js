@@ -29,13 +29,8 @@ try{
       createdAt: req.body.createdAt,
   });
 
-
-
-
-
- 
   await user.save();    
-  res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+  res.status(201).json({username: user.name, email: user.email, message: 'Usuário cadastrado com sucesso!' });
 } catch(error){
   return res.status(500).json({ message: 'Erro ao criar usuário.', error: error.message });
 }  
@@ -70,7 +65,7 @@ exports.loginUser = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({token, message: 'Login bem-sucedido!' });
+    res.status(200).json({token, username: user.name,  email: user.email, message: 'Login bem-sucedido!' });
     } catch (error) {
       res.status(500).json({ message: 'Erro ao realizar login.', error: error.message});
     }
